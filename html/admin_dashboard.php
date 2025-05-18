@@ -8,8 +8,9 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// Fetch admin (customer) data
 $user_id = $_SESSION['admin_id'];
+
+// Fetch admin data
 $sql = "SELECT * FROM `admins` WHERE admin_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -47,7 +48,7 @@ $stmt->close();
             </a>
           </li>
           <li class="sidebar-item">
-            <a class="sidebar-link" href="./authentication-login.php" aria-expanded="false">
+            <a class="sidebar-link" href="../backend/logout.php" aria-expanded="false">
               <i class="ti ti-login"></i>
               <span class="hide-menu">Logout</span>
             </a>
@@ -71,7 +72,9 @@ $stmt->close();
         </ul>
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
           <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-            <a href="#" class="btn btn-primary">IZERIMANA Adeline</a>
+            <a href="#" class="btn btn-primary">
+              <?php echo $user_data['admin_name']; ?>
+            </a>
           </ul>
         </div>
       </nav>
@@ -85,40 +88,65 @@ $stmt->close();
             <div class="card-body p-4">
               <h5 class="card-title fw-semibold mb-4">Complaints</h5>
               <div class="table-responsive">
-                <table class="table text-nowrap mb-0 align-middle">
-                  <thead class="text-dark fs-4">
-                    <tr>
-                      <th>Citizen Name</th>
-                      <th>Category</th>
-                      <th>Description</th>
-                      <th>Status</th>
-                      <th>Submitted</th>
-                      <th>Last Updated</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- Example row (you’ll replace this with dynamic rows later) -->
-                    <tr>
-                      <td>Mukamana Jeannine</td>
-                      <td>Transport</td>
-                      <td>Rwamagana to Kigali road was so damaged</td>
-                      <td>Closed</td>
-                      <td>12 April 2024</td>
-                      <td>12 April 2024</td>
-                      <td><a href="#" class="btn btn-sm btn-primary">Update</a></td>
-                    </tr>
-                    <!-- Add PHP loop here in future -->
-                  </tbody>
-                </table>
+                <?php
+                // Correct JOIN query: complaints INNER JOIN citizens and agencies
+                $select = mysqli_query($conn, "
+                    SELECT complaints.*, citizens.citizen_full_name, agencies.agencie_name
+                    FROM complaints
+                    INNER JOIN citizens ON complaints.citizen_id = citizens.citizen_id
+                    INNER JOIN agencies ON complaints.agencie_id = agencies.agencie_id
+                    INNER JOIN admins ON admins.agencie_id = agencies.agencie_id
+                    WHERE admins.admin_id = '$user_id'
+                    ORDER BY complaints.submission_date DESC
+                ");
+
+                if (mysqli_num_rows($select) > 0) {
+                ?>
+                  <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                      <tr>
+                        <th>Citizen Name</th>
+                        <th>Agency</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while ($fetch = mysqli_fetch_array($select)) {
+                    ?>
+                      <tr>
+                        <td><?php echo $fetch['citizen_full_name']; ?></td>
+                        <td><?php echo $fetch['agencie_name']; ?></td>
+                        <td><?php echo $fetch['description']; ?></td>
+                        <td><?php echo $fetch['status_id']; ?></td>
+                        <td><?php echo $fetch['submission_date']; ?></td>
+                        <td><?php echo $fetch['last_updated']; ?></td>
+                        <td><a href='update-status.php?id="<?php echo $fetch['complaints_id']?>"' class="btn btn-sm btn-primary">update</a></td>
+                        
+
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                    </tbody>
+                  </table>
+                <?php
+                } else {
+                  echo "<p>No complaints found for your agency.</p>";
+                }
+                ?>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <!-- Scripts -->
