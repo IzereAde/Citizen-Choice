@@ -8,8 +8,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MVP - Admin Sign Up</title>
+  <title>CITIZEN CHOICE - Admin Sign Up</title>
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
 </head>
 
 <body>

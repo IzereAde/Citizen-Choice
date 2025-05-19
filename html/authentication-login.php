@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CITIZEN CHOICE - Admin Sign Up</title>
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
 </head>
 
 <body>
@@ -50,7 +51,7 @@
           </form>
 
           <div class="text-center mt-3">
-            <p>Already have an account? <a href="authentication-login.php" class="text-primary">Sign in</a></p>
+            <p>Don't you have an account? <a href="authentication-register.php" class="text-primary">Sign Up</a></p>
           </div>
 
         </div>
