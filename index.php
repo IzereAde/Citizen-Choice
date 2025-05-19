@@ -1,7 +1,59 @@
+<?php
+include "backend/connect.php";
+
+
+// // Email and DB config
+// $senderEmail = "izerimanaadeline2@gmail.com"; 
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "mvp";
+
+// // Connect to database
+// $conn = new mysqli($servername, $username, $password, $dbname);
+// if ($conn->connect_error) {
+//     die("Database connection failed: " . $conn->connect_error);
+// }
+
+// // Handle form submission
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $citizenEmail = $_POST["email"];
+
+//     // Query complaints matching citizen email
+//     $sql = "SELECT * FROM complaints WHERE email = '$citizenEmail'";
+//     $result = $conn->query($sql);
+
+//     if ($result->num_rows > 0) {
+//         // Prepare email content
+//         $message = "Dear citizen,\n\nHere’s the status of your complaints:\n\n";
+//         while ($row = $result->fetch_assoc()) {
+//             $message .= "Complaint ID: " . $row["complaints_id"] . "\n";
+//             $message .= "Title: " . $row["title"] . "\n";
+//             $message .= "Status: " . $row["status"] . "\n";
+//             $message .= "Submitted: " . $row["submitted_at"] . "\n\n";
+//         }
+//         $message .= "Thank you for using CITIZEN CHOICE.";
+
+//         // Send email
+//         $subject = "Your Complaint Status - CITIZEN CHOICE";
+//         $headers = "From: $senderEmail";
+
+//         if (mail($citizenEmail, $subject, $message, $headers)) {
+//             echo "<script>alert('Complaint status sent to your email. Please check your inbox.');</script>";
+//         } else {
+//             echo "<script>alert('Failed to send email.');</script>";
+//         }
+//     } else {
+//         echo "<script>alert('No complaints found for this email.');</script>";
+//     }
+// }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>IZERIMANA Adeline</title>
+  <title>CITIZEN CHOICE</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -9,7 +61,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
+
 </head>
 <style>
   html {
@@ -321,7 +373,7 @@
     margin: 10px auto;">
     allows citizens to submit complaints or feedback on public services. <br> The system should be able to receive, categorize, and route submissions to the appropriate government agency.
   </p>
-  <button class="btn btn-secondary" type="button"><a href="IZERIMAN_Adeline_CV.pdf" class="btn btn-secondary" target="_blank" >
+  <button class="btn btn-secondary" type="button"><a href="html/citizen.php" class="btn btn-secondary" target="_blank" >
   submit complaints or feedback on public services.
   </a></button>
 </div>
@@ -363,12 +415,16 @@
       <!-- Contact Form -->
       <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-          <form class="contact-form" action="" method="post">
-            <input type="text" name="name" id="name" placeholder="Your Name" required>
-            <input type="email" name="email" id="email" placeholder="Your Email" required>
-            
-            <button type="submit">Track</button>
-          </form>
+        <form class="contact-form" action="html/citizen-truck.php" method="post">
+  <input type="text" name="name" id="name" placeholder="Your Name" required>
+  <input type="email" name="email" id="email" placeholder="Your Email" required>
+  <button type="submit" name="track">Track</button>
+</form>
+
+         
+
+
+
         </div>
       </div>
     </div>
