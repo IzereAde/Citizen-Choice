@@ -1,5 +1,5 @@
 <?php session_start(); 
-
+include "../backend/connect.php";
 
 ?>
 
@@ -49,13 +49,33 @@
             </div>
 
             <div class="mb-4">
-              <label class="form-label">Agency</label>
-              <select class="form-select" name="agency_id" required>
-                <option value="">-- Select Agency --</option>
-                <option value="1">Health Ministry</option>
-                <option value="2">Water Board</option>
-                <option value="3">Education Office</option>
+            <label class="form-label">Agency</label>
+            <select class="form-select" name="agency_id" required>
+            <option value="" select='disabled'>-- Select Agency --</option>
+              <?php
+              $select=mysqli_query($conn,"SELECT * FROM `agencies`");
+              if (mysqli_num_rows($select)>0) {
+                 while ($fetch=mysqli_fetch_array($select)) {
+                  ?>
+                  
+                  
+                  <option value=<?php echo $fetch['agencie_id']?>><?php echo $fetch['agencie_name']?></option>
+                  
+                  <?php
+                  
+                 }
+              }else{
+                ?>
+                <option value="" select='disabled'>-- no agency Agency --</option>
+                <?php
+              }
+              ?>
               </select>
+              
+                
+                
+                
+              
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
