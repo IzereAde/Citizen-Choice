@@ -60,6 +60,7 @@ include "backend/connect.php";
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.png" />
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 </head>
@@ -319,7 +320,10 @@ include "backend/connect.php";
 
   <nav class="navbar navbar-expand-sm navbar-light bg-light p-3 mb-3 shadow-sm border-bottom">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold text-primary" href="#home"> CITIZEN CHOICE</a>
+      <a class="navbar-brand fw-bold text-primary" href="#home">
+      <img src="assets/images/logos/favicon.png" alt="">
+         CITIZEN CHOICE
+        </a>
   
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
